@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ignalinos Paslaugos – Autobusai ir Šiukšlių Grafikai</title>
-    <link rel="icon" type="image/svg+xml" href="herbas.svg">
+    <link rel="icon" type="image/png" href="/icon-192.png">
+    <link rel="apple-touch-icon" href="/icon-192.png">
     <style>
         :root {
             --primary: #1e3a8a;
@@ -82,6 +83,33 @@
             width: 100%;
             flex: 1;
             z-index: 10;
+        }
+
+        /* PWA įdiegimo mygtuko stilius */
+        .install-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .install-btn {
+            display: none;
+            background-color: #ffffff;
+            color: var(--primary);
+            border: 2px solid var(--primary-light);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        .install-btn:hover {
+            background-color: var(--primary-light);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
         .cards-grid {
@@ -202,6 +230,13 @@
     </header>
 
     <main>
+        <!-- PWA įdiegimo mygtuko vieta -->
+        <div class="install-container">
+            <button id="install-btn" class="install-btn">
+                📲 Įdiegti programėlę į telefoną
+            </button>
+        </div>
+
         <div class="cards-grid">
             <!-- Autobusai -->
             <a href="https://ignalinos-autobusai.vercel.app" class="card bus">
@@ -231,5 +266,29 @@
         <p>&copy; 2026 Ignalinos Paslaugos. Visos teisės saugomos.</p>
     </footer>
 
+    <!-- PWA Įdiegimo skriptas -->
+    <script>
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'inline-block';
+        });
+
+        installBtn.addEventListener('click', () => {
+            installBtn.style.display = 'none';
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Vartotojas įsidiegė PWA');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
