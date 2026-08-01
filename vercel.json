@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/traukiniai",
+      "destination": "https://ignalinos-traukiniai.vercel.app"
+    },
+    {
+      "source": "/traukiniai/:path*",
+      "destination": "https://ignalinos-traukiniai.vercel.app/:path*"
+    }
+  ]
+}
