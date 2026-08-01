@@ -5,16 +5,16 @@
       "destination": "https://ignalinos-traukiniai.vercel.app"
     },
     {
-      "source": "/traukiniai/:path*",
-      "destination": "https://ignalinos-traukiniai.vercel.app/:path*"
+      "source": "/traukiniai/(.*)",
+      "destination": "https://ignalinos-traukiniai.vercel.app/$1"
     },
     {
       "source": "/autobusai",
       "destination": "https://ignalinos-autobusai.vercel.app"
     },
     {
-      "source": "/autobusai/:path*",
-      "destination": "https://ignalinos-autobusai.vercel.app/:path*"
+      "source": "/autobusai/(.*)",
+      "destination": "https://ignalinos-autobusai.vercel.app/$1"
     }
   ]
 }
